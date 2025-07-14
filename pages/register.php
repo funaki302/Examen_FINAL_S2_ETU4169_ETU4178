@@ -13,6 +13,7 @@ if (isset($_SESSION['user_id'])) {
     <meta charset="UTF-8" />
     <title>Inscription - Site d'emprunt d'objets</title>
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../asset/css/style.css">
 </head>
 <body>
 <div class="container mt-4">

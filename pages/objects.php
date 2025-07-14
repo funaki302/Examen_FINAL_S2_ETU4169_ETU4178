@@ -21,14 +21,17 @@ $objects = getObjects( $filter_category);
 
 <head>
     <meta charset="UTF-8" />
-    <title>Liste des objets - Site d'emprunt d'objets</title>
+    <title>Liste des </title>
     <link rel="stylesheet" href="../asset/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../asset/css/style.css">
+
 </head>
 
 <body>
     <div class="container mt-4">
         <h1>Liste des objets</h1>
-        <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="index.php">Deconnexion</a></p>
+        <p>Bienvenue  | <a href="index.php">Deconnexion</a></p>
+        <h1><?= htmlspecialchars($_SESSION['user_name']) ?> </h1>
 
         <form method="get" class="form-inline mb-3">
             <label for="category" class="mr-2">Filtrer par categorie :</label>
