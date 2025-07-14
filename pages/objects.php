@@ -8,13 +8,12 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-$bdd = connecterBase();
 
-$categories = getCategories($bdd);
+$categories = getCategories();
 
 $filter_category = $_GET['category'] ?? '';
 
-$objects = getObjects($bdd, $filter_category);
+$objects = getObjects( $filter_category);
 ?>
 
 <!DOCTYPE html>
@@ -29,10 +28,10 @@ $objects = getObjects($bdd, $filter_category);
 <body>
     <div class="container mt-4">
         <h1>Liste des objets</h1>
-        <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="index.php">Déconnexion</a></p>
+        <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="index.php">Deconnexion</a></p>
 
         <form method="get" class="form-inline mb-3">
-            <label for="category" class="mr-2">Filtrer par catégorie :</label>
+            <label for="category" class="mr-2">Filtrer par categorie :</label>
             <select name="category" id="category" class="form-control mr-2">
                 <option value="">Toutes</option>
                 <?php foreach ($categories as $cat): ?>
@@ -48,8 +47,8 @@ $objects = getObjects($bdd, $filter_category);
             <thead>
                 <tr>
                     <th>Nom de l'objet</th>
-                    <th>Catégorie</th>
-                    <th>Date de retour (si emprunté)</th>
+                    <th>Categorie</th>
+                    <th>Date de retour (si emprunte)</th>
                 </tr>
             </thead>
             <tbody>

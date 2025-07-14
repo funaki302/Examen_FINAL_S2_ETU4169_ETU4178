@@ -1,4 +1,5 @@
-function connecterBase()
+<?php
+function dbconnect()
 {
     $bdd = mysqli_connect('localhost', 'root', '', 'emprunt_objets');
     if ($bdd) {
@@ -8,3 +9,4 @@ function connecterBase()
         die('Erreur de connexion à la base de données : ' . mysqli_connect_error());
     }
 }
+?>

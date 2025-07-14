@@ -1,43 +1,5 @@
 <?php
 session_start();
-require_once __DIR__ . '/../inc/fonction.php';
-
-$bdd = connecterBase();
-$message = '';
-
-
-if (isset($_POST['register'])) {
-    $nom = $_POST['nom'] ;
-    $date_naissance = $_POST['date_naissance'] ;
-    $genre = $_POST['genre'] ;
-    $email = $_POST['email'] ;
-    $ville = $_POST['ville'] ;
-    $mdp = $_POST['mdp'] ;
-
-    if ($nom && $date_naissance && $genre && $email && $ville && $mdp) {
-        $email = mysqli_real_escape_string($bdd, $email);
-        $query = "SELECT * FROM membre WHERE email = '$email'";
-        $result = mysqli_query($bdd, $query);
-        if ($result && mysqli_num_rows($result) > 0) {
-            $message = "Cet email est déjà utilisé.";
-        } else {
-            $hashed_mdp = password_hash($mdp, PASSWORD_DEFAULT);
-            $nom = mysqli_real_escape_string($bdd, $nom);
-            $date_naissance = mysqli_real_escape_string($bdd, $date_naissance);
-            $genre = mysqli_real_escape_string($bdd, $genre);
-            $ville = mysqli_real_escape_string($bdd, $ville);
-            $query = "INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp) VALUES ('$nom', '$date_naissance', '$genre', '$email', '$ville', '$hashed_mdp')";
-            if (mysqli_query($bdd, $query)) {
-                $message = "Inscription réussie. Vous pouvez maintenant vous connecter.";
-            } else {
-                $message = "Erreur lors de l'inscription.";
-            }
-        }
-    } else {
-        $message = "Veuillez remplir tous les champs.";
-    }
-}
-
 
 if (isset($_SESSION['user_id'])) {
     header("Location: index.php");
@@ -55,10 +17,10 @@ if (isset($_SESSION['user_id'])) {
 <body>
 <div class="container mt-4">
     <h1>Inscription</h1>
-    <?php if ($message): ?>
-        <div class="alert alert-info"><?= htmlspecialchars($message) ?></div>
+    <?php if (isset($_GET['message'])): ?>
+        <div class="alert alert-info"><?= htmlspecialchars(urldecode($_GET['message'])) ?></div>
     <?php endif; ?>
-    <form method="post">
+    <form method="post" action="traitement_register.php">
         <div class="form-group">
             <label>Nom</label>
             <input type="text" name="nom" class="form-control" required />
@@ -71,8 +33,7 @@ if (isset($_SESSION['user_id'])) {
             <label>Genre</label>
             <select name="genre" class="form-control" required>
                 <option value="M">Masculin</option>
-                <option value="F">Féminin</option>
-                <option value="Autre">Autre</option>
+                <option value="F">Feminin</option>
             </select>
         </div>
         <div class="form-group">
@@ -89,8 +50,8 @@ if (isset($_SESSION['user_id'])) {
         </div>
         <button type="submit" name="register" class="btn btn-success">S'inscrire</button>
     </form>
-    <p class="mt-3">Déjà un compte ? <a href="index.php">Connectez-vous ici</a></p>
+    <p class="mt-3">Dejà un compte ? <a href="../pages/index.php">Connectez-vous ici</a></p>
 </div>
-<script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="../asset/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
