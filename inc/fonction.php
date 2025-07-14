@@ -85,6 +85,40 @@ function rch_all($nom, $categorie, $disponible) {
 
     return $retour;
 }
+function add_object($nom_objet, $id_categorie, $id_membre)
+{
+    $req = "INSERT INTO objet (nom_objet,id_categorie,id_membre) values ('$nom_objet',$id_categorie,$id_membre)";
+    $conn = dbconnect();
+    $sql = mysqli_query($conn, $req);
+    return mysqli_insert_id($conn); // <-- Ajouté
+}
 
+function set_pictures($id_object, $image)
+{
+    $req = "INSERT INTO image_objet (id_object,nom_image) values ($id_object, $image)";
+    $conn = dbconnect();
+    $sql = mysqli_query($conn, $req);
+   }
+
+   function get_all_categorie() {
+    $bdd = dbconnect(); 
+    $query = "SELECT id_categorie, nom_categorie FROM categorie_objet";
+    $result = mysqli_query($bdd, $query);
+
+    $categories = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $categories[] = $row;
+    }
+
+    return $categories;
+}
+
+function one_image($id_object)
+{
+    $req = "SELECT nom_image FROM v_image_objet WHERE id_object = $id_object LIMIT 1";
+    $conn = dbconnect();
+    $sql = mysqli_query($conn, $req);
+    return mysqli_fetch_assoc($sql);
+}
 
 ?>

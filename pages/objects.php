@@ -29,6 +29,7 @@ $objects = getObjects( $filter_category);
     <div class="container mt-4">
         <h1>Liste des objets</h1>
         <p>Bienvenue  | <a href="index.php">Deconnexion</a></p>
+        <p><a href="new_objet.php">Publier</a></p>
         <h1><?= htmlspecialchars($_SESSION['user_name']) ?> </h1>
         <p><a href="recherche.php"> Rechercher </a></p>    
         <form method="get" class="form-inline mb-3">

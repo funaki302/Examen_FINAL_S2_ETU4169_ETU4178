@@ -29,6 +29,7 @@ $objects = $_SESSION['search_results'] ?? [];
     <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="index.php?logout=1">Déconnexion</a></p>
     
     <!-- Formulaire de recherche -->
+     <p><a href="objects.php">Retour</a></p>
     <form method="get" action="traitement_recherche.php" class="mb-3">
         <div class="row">
             <div class="col-md-4">
