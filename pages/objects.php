@@ -7,8 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location:index.php");
     exit;
 }
-
-
 $categories = getCategories();
 
 $filter_category = $_GET['category'] ?? '';
@@ -32,7 +30,7 @@ $objects = getObjects( $filter_category);
         <h1>Liste des objets</h1>
         <p>Bienvenue  | <a href="index.php">Deconnexion</a></p>
         <h1><?= htmlspecialchars($_SESSION['user_name']) ?> </h1>
-
+        <p><a href="recherche.php"> Rechercher </a></p>    
         <form method="get" class="form-inline mb-3">
             <label for="category" class="mr-2">Filtrer par categorie :</label>
             <select name="category" id="category" class="form-control mr-2">

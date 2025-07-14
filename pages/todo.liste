@@ -7,4 +7,9 @@
 
 
     Version 2:
-    - recherche dans object 
+    - recherche dans object decriteres
+    creation de  v_categ_object_emprunt et v_categ_object
+       -> page recherche.php 
+       -> recherche_all();
+
+    
