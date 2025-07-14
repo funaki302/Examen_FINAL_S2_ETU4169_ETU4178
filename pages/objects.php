@@ -51,6 +51,7 @@ $objects = getObjects( $filter_category);
                     <th>Nom de l'objet</th>
                     <th>Categorie</th>
                     <th>Date de retour (si emprunte)</th>
+                    <th>emprunte</th>
                 </tr>
             </thead>
             <tbody>
@@ -58,7 +59,8 @@ $objects = getObjects( $filter_category);
                     <tr>
                         <td><?= htmlspecialchars($obj['nom_objet']) ?></td>
                         <td><?= htmlspecialchars($obj['nom_categorie']) ?></td>
-                        <td><?= $obj['date_retour'] ? htmlspecialchars($obj['date_retour']) : 'Disponible' ?></td>
+                        <td><?= $obj['date_retour'] ? ("Disponible le :"+ htmlspecialchars($obj['date_retour']) ): 'Disponible' ?></td>
+                        <td><a href="traitement_emprunt.php?id_obj=<?=$obj['id_objet']?>">Emprunter</a></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

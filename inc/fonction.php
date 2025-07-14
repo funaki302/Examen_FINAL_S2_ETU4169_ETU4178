@@ -121,4 +121,22 @@ function one_image($id_object)
     return mysqli_fetch_assoc($sql);
 }
 
+function emprunt($id_objet, $id_membre){
+    $req = "INSERT into emprunt (id_objet, id_membre, date_emprunt) values ($id_objet, $id_membre, NOW())";
+    $conn = dbconnect();
+    $sql = mysqli_query($conn, $req);
+    return mysqli_insert_id($conn);
+}
+
+function set_date_fin($jours,$id_emprunt){
+    $req1 = "SELECT date_emprunt FROM emprunt WHERE id_emprunt = $id_emprunt";
+    $sql1 = mysqli_query(dbconnect(), $req1);
+    $date_debut = mysqli_fetch_assoc($sql1)['date_emprunt'];
+    $date_fin = date('Y-m-d', strtotime($date_debut . ' + ' . $jours . ' days'));
+    echo $date_fin;
+
+    $req = "UPDATE emprunt SET date_retour = '$date_fin' WHERE id_emprunt = '$id_emprunt'";
+    mysqli_query(dbconnect(), $req);
+}
+
 ?>
