@@ -48,6 +48,19 @@ CREATE TABLE emprunt (
     FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
 );
 
+CREATE TABLE Rendre (
+    id_remis INT AUTO_INCREMENT PRIMARY KEY,
+    id_emprunt INT ,
+    id_objet INT NOT NULL,
+    id_membre INT NOT NULL,
+    date_emprunt DATE NOT NULL,
+    Etat INT NOT NULL,
+    date_retour DATE DEFAULT NULL,
+    FOREIGN KEY (id_objet) REFERENCES objet(id_objet),
+    FOREIGN KEY (id_membre) REFERENCES membre(id_membre)
+);
+
+
 
 
 INSERT INTO membre (nom, date_naissance, genre, email, ville, mdp, image_profil) VALUES

@@ -26,8 +26,7 @@ $objects = $_SESSION['search_results'] ?? [];
 <body>
 <div class="container mt-4">
     <h1>Liste des objets</h1>
-    <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="index.php?logout=1">Déconnexion</a></p>
-    
+    <p>Bienvenue, <?= htmlspecialchars($_SESSION['user_name']) ?> | <a href="profil.php" >Profil</a> | |<a href="index.php?logout=1">Déconnexion</a></p>
     <!-- Formulaire de recherche -->
      <p><a href="objects.php">Retour</a></p>
     <form method="get" action="traitement_recherche.php" class="mb-3">

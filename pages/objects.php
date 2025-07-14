@@ -24,11 +24,10 @@ $objects = getObjects( $filter_category);
     <link rel="stylesheet" href="../asset/css/style.css">
 
 </head>
-
 <body>
     <div class="container mt-4">
         <h1>Liste des objets</h1>
-        <p>Bienvenue  | <a href="index.php">Deconnexion</a></p>
+        <p>| <a href="profil.php" >Profil</a> |<a href="index.php">Deconnexion</a></p>
         <p><a href="new_objet.php">Publier</a></p>
         <h1><?= htmlspecialchars($_SESSION['user_name']) ?> </h1>
         <p><a href="recherche.php"> Rechercher </a></p>    

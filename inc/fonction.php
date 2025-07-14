@@ -138,5 +138,48 @@ function set_date_fin($jours,$id_emprunt){
     $req = "UPDATE emprunt SET date_retour = '$date_fin' WHERE id_emprunt = '$id_emprunt'";
     mysqli_query(dbconnect(), $req);
 }
+function info_membre($id_membre) {
+    $conn = dbconnect();
+    
+    $req = "SELECT * FROM po_membre WHERE id_membre = ?";
+    $stmt = mysqli_prepare($conn, $req);
+    mysqli_stmt_bind_param($stmt, "i", $id_membre);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+
+    $membre = mysqli_fetch_assoc($result);
+    
+    mysqli_stmt_close($stmt);
+    
+    return $membre ? $membre : false;
+}
+
+
+function get_list_emprunt($_id_membre) {
+    $bdd = dbconnect(); 
+    $_id_membre = intval($_id_membre); 
+
+
+    $query = "SELECT e.id_emprunt, e.id_objet, o.nom_objet, c.nom_categorie, m.nom AS proprietaire, 
+                     (SELECT nom_image FROM images_objet WHERE id_objet = e.id_objet LIMIT 1) AS image, 
+                     e.date_emprunt
+              FROM emprunt e
+              JOIN objet o ON e.id_objet = o.id_objet
+              JOIN categorie_objet c ON o.id_categorie = c.id_categorie
+              JOIN membre m ON o.id_membre = m.id_membre
+              WHERE e.id_membre = $_id_membre AND e.date_retour IS NULL";
+
+    $result = mysqli_query($bdd, $query);
+    $emprunts = [];
+
+    while ($row = mysqli_fetch_assoc($result)) {
+        $emprunts[] = $row;
+    }
+
+    return $emprunts;
+}
+
+
+
 
 ?>
